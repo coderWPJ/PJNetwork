@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "PJNetwork"
-  s.version = “0.0.1”
+  s.version = “0.0.2”
   s.summary = "PJNetwork is a high level request util based on AFNetworking."
   s.homepage = "https://github.com/yuantiku/YTKNetwork"
   s.license= { :type => "MIT", :file => "LICENSE" }

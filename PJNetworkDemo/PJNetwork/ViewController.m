@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import <PJNetwork/PJNetworkStation.h>
+#import <PJNetwork.h>
 
 @interface ViewController ()
 

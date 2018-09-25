@@ -12,9 +12,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 #s.private_header_files = "PJNetwork/PJNetwork.h"
   s.ios.deployment_target = "8.0"
-  s.osx.deployment_target = "10.9"
-  s.watchos.deployment_target = "2.0"
-  s.tvos.deployment_target = "9.0"
   s.framework = "CFNetwork"
   s.dependency "AFNetworking", "~> 3.1"
 

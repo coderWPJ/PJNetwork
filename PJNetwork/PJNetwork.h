@@ -6,28 +6,27 @@
 //  Copyright © 2018年 wpj. All rights reserved.
 //
 
-#ifndef PJNetwork_h
-#define PJNetwork_h
+#import <Foundation/Foundation.h>
 
-//#if __has_include(<PJNetwork/PJNetwork.h>)
+#ifndef _PJNETWORK_
+#define _PJNETWORK_
 
-    #import <PJNetwork/PJNetworkStation.h>
-    #import <PJNetwork/PJNetworkSessionManager.h>
-    #import <PJNetwork/PJRequest.h>
-    #import <PJNetwork/PJNetworkConfig.h>
-    #import <PJNetwork/PJNetworkDataShell.h>
+#if __has_include(<PJNetwork/PJNetwork.h>)
 
-//#else
-//
-//    #import "PJNetworkStation.h"
-//    #import "PJNetworkSessionManager.h"
-//    #import "PJRequest.h"
-//    #import "PJNetworkConfig.h"
-//    #import "PJNetworkDataShell.h"
-//
-//#endif /* __has_include */
+#import <PJNetwork/PJNetworkStation.h>
+#import <PJNetwork/PJNetworkSessionManager.h>
+#import <PJNetwork/PJRequest.h>
+#import <PJNetwork/PJNetworkConfig.h>
+#import <PJNetwork/PJNetworkDataShell.h>
 
+#else
 
+#import "PJNetworkStation.h"
+#import "PJNetworkSessionManager.h"
+#import "PJRequest.h"
+#import "PJNetworkConfig.h"
+#import "PJNetworkDataShell.h"
 
+#endif /* __has_include */
 
-#endif /* PJNetwork_h */
+#endif /* _PJNETWORK_ */

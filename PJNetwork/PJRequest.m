@@ -7,8 +7,13 @@
 //
 
 #import "PJRequest.h"
-#import <AFNetworking.h>
 #import "PJNetworkConfig.h"
+
+#if __has_include(<AFNetworking/AFNetworking.h>)
+#import <AFNetworking/AFNetworking.h>
+#else
+#import "AFNetworking.h"
+#endif
 
 @interface PJRequest ()
 

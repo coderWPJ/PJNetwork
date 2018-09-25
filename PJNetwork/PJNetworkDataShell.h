@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 // 一个枚举对应一种壳，对应一个shell key
 typedef NS_ENUM(NSInteger, PJNetworkDataShellType) {

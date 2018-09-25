@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 // 一个枚举对应一种壳，对应一个shell key
 typedef NS_ENUM(NSInteger, PJNetworkDataShellType) {
     PJNetworkDataShellTypeVCIdentify = 0,
     
 };
+
+
+
+#if TARGET_OS_IOS || TARGET_OS_TV
+    #import <UIKit/UIKit.h>
+NS_ASSUME_NONNULL_BEGIN
 
 // shell keys
 FOUNDATION_EXPORT NSString *const PJNetworkDataShell_ViewControllerIdentifierKey;
@@ -53,3 +58,7 @@ FOUNDATION_EXPORT NSString *const PJNetworkDataShell_ViewControllerIdentifierKey
 - (id)allShellInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#endif

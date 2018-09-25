@@ -8,6 +8,8 @@
 
 #import "PJNetworkDataShell.h"
 
+#if TARGET_OS_IOS || TARGET_OS_TV
+
 NSString * const PJNetworkDataShell_ViewControllerIdentifierKey = @"com.pj.networking.viewcontroller.hashValue";
 
 @implementation PJNetworkDataShell
@@ -116,3 +118,5 @@ NSString * const PJNetworkDataShell_ViewControllerIdentifierKey = @"com.pj.netwo
 }
 
 @end
+
+#endif

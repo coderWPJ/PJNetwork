@@ -6,7 +6,11 @@
 //  Copyright © 2018年 wpj. All rights reserved.
 //
 
-#import <AFNetworking.h>
+#if __has_include(<AFNetworking/AFNetworking.h>)
+#import <AFNetworking/AFNetworking.h>
+#else
+#import "AFNetworking.h"
+#endif
 
 @interface PJNetworkSessionManager : AFHTTPSessionManager
 

@@ -113,6 +113,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
         return;
     }
     
+#if TARGET_OS_IOS || TARGET_OS_TV
     // 记录所有与VC有绑定的请求，
     id vcHashKey = [request.params shellInfo:PJNetworkDataShellTypeVCIdentify];
     if (vcHashKey) {
@@ -126,6 +127,8 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
         [vcRequestArray addObject:request];
         _recordVCRequestList[vcHashKey] = vcRequestArray;
     }
+#endif
+   
     
     request.privateSetSecctionTask(dataTask);
     Lock();
@@ -145,8 +148,10 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
         requestUrlStr = [[PJNetworkConfig shareConfig].baseUrl stringByAppendingPathComponent:requestUrlStr];
     }
     if (request.header && [request.header isKindOfClass:[NSDictionary class]]) {
+        __weak typeof(self) weakSelf = self;
         [request.header enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            [_sessionManager.requestSerializer setValue:obj forHTTPHeaderField:key];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.sessionManager.requestSerializer setValue:obj forHTTPHeaderField:key];
         }];
     }
     _sessionManager.responseSerializer = request.responseSerializer;
@@ -154,7 +159,13 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     NSString *methodString = httpMethodStringsArray[request.httpMethod];
     NSError *serializationError = nil;
     
-    id paramsObj = [PJNetworkDataShell holyParams:request.params];
+    id paramsObj = @{};
+#if TARGET_OS_IOS || TARGET_OS_TV
+    paramsObj = [PJNetworkDataShell holyParams:request.params];
+#else
+    paramsObj = request.params;
+#endif
+    
     NSMutableURLRequest *temUrlRequest = [_sessionManager.requestSerializer requestWithMethod:methodString URLString:[[NSURL URLWithString:requestUrlStr] absoluteString] parameters:paramsObj error:&serializationError];
     if (serializationError) {
         return nil;

@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import <PJNetwork/PJNetworkStation.h>
+
 @interface ViewController ()
 
 @end
@@ -16,7 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [PJNetworkStation GET:@"http://lf.snssdk.com/api/2/article/v35/stream/" params:nil header:nil result:^(BOOL success, id info) {
+        
+    }];
+    
 }
 
 

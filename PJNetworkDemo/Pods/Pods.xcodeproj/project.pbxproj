@@ -12,6 +12,7 @@
 		03FF4734B54BA2249BB42753A11632C7 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A9FA07D138866F0F73C00233821F5A2 /* AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05A4548136E9B14481C5D10CF3FCB29B /* PJNetwork-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEAB49D947EC6D4CB865BF306780FE1 /* PJNetwork-dummy.m */; };
 		093F725EB6A1608C98396D7CEA693854 /* AFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 763661F1FD930C8CE9C1B242FCE1F144 /* AFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		09F52F04977BC8FC882B74E14F75FC1E /* PJNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = C10291973F93F3532FAEF9BCAE5F71A4 /* PJNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1374F6F261BA8432F8996B1F13D23478 /* AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 05761CCB611701B6BA5DEE1F75E9B122 /* AFNetworking-dummy.m */; };
 		13C301A676B6175FD6B857B3F4E22815 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F598AD4138BACDC982D936A3E00714 /* UIActivityIndicatorView+AFNetworking.m */; };
 		17D392C4A9F62785BCD276DBF48D4AA4 /* PJNetworkSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EB91B5FBDA3E19E0E8DA2B3495E62727 /* PJNetworkSessionManager.m */; };
@@ -48,7 +49,6 @@
 		B32E95F52105CC7905CC18C2F1C2F37D /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 3619CDFBF4BD3FF4059B74A50D4604A9 /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B56ECE8FB8E120CECE077406594D99A4 /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EB4B8D1DFD66A5C45464248F934946B3 /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7C7F5D6D9CB25DBA504BDA60131CB6F /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EFE2CD68FE872BFEBE5CA9FADBDD30 /* UIWebView+AFNetworking.m */; };
-		B8727497F851BDBC2365C41826B1A1FD /* PJNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = C10291973F93F3532FAEF9BCAE5F71A4 /* PJNetwork.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BC1B8C7137931EFCCA5B830128B6DD29 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = F892840D176602C6D2F010E2AD63E9CE /* UIImageView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFF671705EC5731DBFF84BF0DE432BFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13D2D76012584A025FE61E9450EC5643 /* SystemConfiguration.framework */; };
 		C2A146293ACCC7A3C103F3327687C3C2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC15AD67425A9C951318C2EB8447B9BC /* MobileCoreServices.framework */; };
@@ -407,7 +407,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8727497F851BDBC2365C41826B1A1FD /* PJNetwork.h in Headers */,
+				09F52F04977BC8FC882B74E14F75FC1E /* PJNetwork.h in Headers */,
 				5813369FEFB37391C01B892AEFCCFCBE /* PJNetworkConfig.h in Headers */,
 				4AFBD713C0B654C0DEA47CD4213B3046 /* PJNetworkDataShell.h in Headers */,
 				A7095431BE8FC4B6EB58B977C2A12AF4 /* PJNetworkSessionManager.h in Headers */,

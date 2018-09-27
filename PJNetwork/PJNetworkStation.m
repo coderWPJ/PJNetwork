@@ -10,7 +10,7 @@
 #import "PJNetworkConfig.h"
 #import <pthread/pthread.h>
 #import "PJNetworkSessionManager.h"
-#import "Reachability.h"
+#import "PJ_Reachability.h"
 
 #if __has_include(<AFNetworking/AFNetworking.h>)
     #import <AFNetworking/AFNetworking.h>
@@ -102,7 +102,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 {
     /// 当蜂窝网络不可用时
     if (PJNetworkConfig.cellularDisabled()){
-        Reachability *reachability   = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+        PJ_Reachability *reachability   = [PJ_Reachability reachabilityWithHostName:@"www.baidu.com"];
         if ([reachability currentReachabilityStatus] == ReachableViaWWAN){
             result(NO, @"已禁用蜂窝移动网络");
             return;

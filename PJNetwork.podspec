@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "PJNetwork"
-  s.version = "1.0.6"
+  s.version = "1.0.7"
   s.summary = "PJNetwork is a high level request util based on AFNetworking."
   s.homepage = "https://github.com/coderWPJ"
   s.license= "MIT"
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
     ss.osx.deployment_target = '10.9'
     ss.tvos.deployment_target = '9.0'
     ss.source_files = 'PJNetwork/Reachability/*.{h,m}'
-    ss.public_header_files = 'PJNetwork/Reachability/Reachability.h'
+    ss.public_header_files = 'PJNetwork/Reachability/PJ_Reachability.h'
     ss.frameworks = 'SystemConfiguration'
   end
 

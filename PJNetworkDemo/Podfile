@@ -8,6 +8,5 @@ target 'PJNetwork' do
   
   ### Remote ###
   pod 'MJExtension'
-  
 
 end

@@ -181,7 +181,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     if (serializationError) {
         return nil;
     }
-    if (![_sessionManager.requestSerializer.HTTPMethodsEncodingParametersInURI containsObject:[methodString uppercaseString]]) {
+    if (![_sessionManager.requestSerializer.HTTPMethodsEncodingParametersInURI containsObject:[methodString uppercaseString]] && paramsObj) {
         NSData *body = [NSJSONSerialization dataWithJSONObject:paramsObj options:kNilOptions error:nil];
         [temUrlRequest setHTTPBody:body];
     }

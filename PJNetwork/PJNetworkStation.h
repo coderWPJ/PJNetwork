@@ -10,12 +10,17 @@
 /*************
  NOTE:
  
- 使用方法：步骤一：构建 PJRequest 请求体对象
+ 使用方法：
+ 
+ 方法一：
+ 
+ 步骤一：构建 PJRequest 请求体对象
  步骤二：利用 PJNetworkStation 的下面2种方法请求（类方法会调用对象方法）
  1. 对象方法      startRequest:result:
  2. 类方法        request:result:
  
- (或者用 PJNetworkStation_Shortcut 分类中快速请求，封装了是上面2步)
+ 方法二：
+ 用 PJNetworkStation_Shortcut 分类中快速请求，封装了上面2步
  
  
  目前已实现功能
@@ -47,8 +52,8 @@ FOUNDATION_EXPORT NSString *const PJNetwork_VCDealloc_Notitication;
  */
 + (instancetype)shareStation;
 
-- (void)startRequest:(PJRequest *)request result:(RequestCompleteBlock)result;
-+ (void)request:(PJRequest *)request result:(RequestCompleteBlock)result;
+- (void)startRequest:(PJRequest *)request result:(PJRequestCompleteBlock)result;
++ (void)request:(PJRequest *)request result:(PJRequestCompleteBlock)result;
 
 @end
 
@@ -56,9 +61,9 @@ FOUNDATION_EXPORT NSString *const PJNetwork_VCDealloc_Notitication;
 
 @interface PJNetworkStation (PJNetworkStation_Shortcut)
 
-- (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(RequestCompleteBlock)result;
+- (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
 
-+ (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(RequestCompleteBlock)result;
++ (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
 
 
 /**
@@ -69,8 +74,8 @@ FOUNDATION_EXPORT NSString *const PJNetwork_VCDealloc_Notitication;
  @param header header
  @param result result
  */
-+ (void)POST:(NSString *)url params:(id)params header:(id)header result:(RequestCompleteBlock)result;
-+ (void)POST:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(RequestCompleteBlock)result;
++ (void)POST:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result;
++ (void)POST:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
 
 /**
  GET 请求  （disabledBaseUrl默认为NO）
@@ -80,7 +85,7 @@ FOUNDATION_EXPORT NSString *const PJNetwork_VCDealloc_Notitication;
  @param header header
  @param result result
  */
-+ (void)GET:(NSString *)url params:(id)params header:(id)header result:(RequestCompleteBlock)result;
-+ (void)GET:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(RequestCompleteBlock)result;
++ (void)GET:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result;
++ (void)GET:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
 
 @end

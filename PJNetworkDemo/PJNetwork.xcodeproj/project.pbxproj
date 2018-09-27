@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		711BE6114DE1ACF3F3469197 /* libPods-PJNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1E41927F1DA63D3960D194 /* libPods-PJNetwork.a */; };
+		946BBB70215CCF820055A17C /* HostNetworkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 946BBB6F215CCF820055A17C /* HostNetworkLayer.m */; };
 		94B0C24E215CAC3E009F22D7 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B0C24D215CAC3E009F22D7 /* RequestViewController.m */; };
 		94B0C251215CB150009F22D7 /* GetListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B0C250215CB150009F22D7 /* GetListModel.m */; };
 		94E21C452151E6ED005A8BC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E21C442151E6ED005A8BC3 /* AppDelegate.m */; };
@@ -20,6 +21,8 @@
 
 /* Begin PBXFileReference section */
 		2A1E41927F1DA63D3960D194 /* libPods-PJNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PJNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		946BBB6E215CCF820055A17C /* HostNetworkLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HostNetworkLayer.h; sourceTree = "<group>"; };
+		946BBB6F215CCF820055A17C /* HostNetworkLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HostNetworkLayer.m; sourceTree = "<group>"; };
 		94B0C24C215CAC3E009F22D7 /* RequestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestViewController.h; sourceTree = "<group>"; };
 		94B0C24D215CAC3E009F22D7 /* RequestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestViewController.m; sourceTree = "<group>"; };
 		94B0C24F215CB150009F22D7 /* GetListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetListModel.h; sourceTree = "<group>"; };
@@ -77,6 +80,8 @@
 				94E21C472151E6ED005A8BC3 /* ViewController.m */,
 				94B0C24C215CAC3E009F22D7 /* RequestViewController.h */,
 				94B0C24D215CAC3E009F22D7 /* RequestViewController.m */,
+				946BBB6E215CCF820055A17C /* HostNetworkLayer.h */,
+				946BBB6F215CCF820055A17C /* HostNetworkLayer.m */,
 				94B0C24F215CB150009F22D7 /* GetListModel.h */,
 				94B0C250215CB150009F22D7 /* GetListModel.m */,
 				94E21C492151E6ED005A8BC3 /* Main.storyboard */,
@@ -234,6 +239,7 @@
 				94E21C532151E6ED005A8BC3 /* main.m in Sources */,
 				94B0C24E215CAC3E009F22D7 /* RequestViewController.m in Sources */,
 				94E21C452151E6ED005A8BC3 /* AppDelegate.m in Sources */,
+				946BBB70215CCF820055A17C /* HostNetworkLayer.m in Sources */,
 				94B0C251215CB150009F22D7 /* GetListModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

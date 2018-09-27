@@ -25,6 +25,14 @@
  POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+/**
+ Notice:
+ 此类代码全部来自 Reachability，之所以新建此类是为了防止与某些第三方 pod 起冲突导致编译不通过
+ 
+ 
+ */
+
 #import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 

@@ -70,7 +70,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
                 if (request.requestTask) {
                     if ((request.requestTask.state == NSURLSessionTaskStateRunning) || (request.requestTask.state == NSURLSessionTaskStateSuspended)) {
                         [request.requestTask cancel];
-                        NSLog(@"第%d个请求被取消了，标识是：%ld", flag, request.requestTask.taskIdentifier);
+//                        NSLog(@"第%d个请求被取消了，标识是：%ld", flag, request.requestTask.taskIdentifier);
                     }
                 }
                 flag += 1;
@@ -92,13 +92,13 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     return shareStation;
 }
 
-+ (void)request:(PJRequest *)request result:(RequestCompleteBlock)result
++ (void)request:(PJRequest *)request result:(PJRequestCompleteBlock)result
 {
     [[PJNetworkStation shareStation] startRequest:request result:result];
 }
 
 /// 开始请求
-- (void)startRequest:(PJRequest *)request result:(RequestCompleteBlock)result
+- (void)startRequest:(PJRequest *)request result:(PJRequestCompleteBlock)result
 {
     /// 当蜂窝网络不可用时
     if (PJNetworkConfig.cellularDisabled()){
@@ -181,10 +181,10 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     if (serializationError) {
         return nil;
     }
-    if (![_sessionManager.requestSerializer.HTTPMethodsEncodingParametersInURI containsObject:[methodString uppercaseString]] && paramsObj) {
-        NSData *body = [NSJSONSerialization dataWithJSONObject:paramsObj options:kNilOptions error:nil];
-        [temUrlRequest setHTTPBody:body];
-    }
+//    if (![_sessionManager.requestSerializer.HTTPMethodsEncodingParametersInURI containsObject:[methodString uppercaseString]] && paramsObj) {
+//        NSData *body = [NSJSONSerialization dataWithJSONObject:paramsObj options:kNilOptions error:nil];
+//        [temUrlRequest setHTTPBody:body];
+//    }
     __block NSURLSessionDataTask *dataTask = nil;
     dataTask = [_sessionManager dataTaskWithRequest:temUrlRequest
                                      uploadProgress:nil
@@ -213,7 +213,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
         return;
     }
     [self clearRequestFromListWhenComplete:requestKeyStr];
-    __block RequestCompleteBlock resultBlock = request.requestResultBlock;
+    __block PJRequestCompleteBlock resultBlock = request.requestResultBlock;
     if (!resultBlock) {
         return;
     }
@@ -258,33 +258,33 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 
 @implementation PJNetworkStation (PJNetworkStation_Shortcut)
 
-- (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(RequestCompleteBlock)result
+- (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
 {
     PJRequest *request = [PJRequest request:method urlString:url params:params header:header disabledBaseUrl:disabled];
     [self startRequest:request result:result];
 }
 
-+ (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(RequestCompleteBlock)result
++ (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
 {
     [[PJNetworkStation shareStation] requst:method url:url params:params header:header disabledBaseUrl:disabled result:result];
 }
 
-+ (void)POST:(NSString *)url params:(id)params header:(id)header result:(RequestCompleteBlock)result
++ (void)POST:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result
 {
     [PJNetworkStation requst:PJHttpMethodPOST url:url params:params header:header disabledBaseUrl:NO result:result];
 }
 
-+ (void)POST:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(RequestCompleteBlock)result
++ (void)POST:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
 {
     [PJNetworkStation requst:PJHttpMethodPOST url:url params:params header:header disabledBaseUrl:disabled result:result];
 }
 
-+ (void)GET:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(RequestCompleteBlock)result
++ (void)GET:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
 {
     [PJNetworkStation requst:PJHttpMethodGET url:url params:params header:header disabledBaseUrl:disabled result:result];
 }
 
-+ (void)GET:(NSString *)url params:(id)params header:(id)header result:(RequestCompleteBlock)result
++ (void)GET:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result
 {
     [PJNetworkStation requst:PJHttpMethodGET url:url params:params header:header disabledBaseUrl:NO result:result];
 }

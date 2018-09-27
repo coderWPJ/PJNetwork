@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^ RequestCompleteBlock) (BOOL success, id info);
+typedef void (^ PJRequestCompleteBlock) (BOOL success, id info);
 
 typedef NS_ENUM(NSUInteger, PJHttpMethod) {
     PJHttpMethodGET = 0,
@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, PJResponseSerializerType) {
 
 @property (nonatomic, copy) NSError *error;
 
-@property (nonatomic, copy) RequestCompleteBlock requestResultBlock;
+@property (nonatomic, copy) PJRequestCompleteBlock requestResultBlock;
 
 /**
  是否忽略 baseUrl（不使用）
@@ -103,11 +103,11 @@ typedef NS_ENUM(NSInteger, PJResponseSerializerType) {
 /**
  quickly init
  
- @param method GET or POST
+ @param httpMethod PJHttpMethodGET or PJHttpMethodPOST
  @param urlString urlString
  @param params params
  @param header header
- @param disabledBaseUrl 是否使用 baseUrl
+ @param disabled 是否使用 baseUrl
  */
 + (instancetype)request:(PJHttpMethod)httpMethod urlString:(NSString *)urlString params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled;
 + (instancetype)request:(PJHttpMethod)httpMethod urlString:(NSString *)urlString params:(id)params header:(id)header;

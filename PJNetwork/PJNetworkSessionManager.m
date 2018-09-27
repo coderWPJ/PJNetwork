@@ -63,7 +63,7 @@
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
     [super URLSession:session task:task didCompleteWithError:error];
-    NSLog(@"一次请求结束 , 错误：%@",  error);
+//    NSLog(@"一次请求结束 , 错误：%@",  error);
 }
 
 - (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error

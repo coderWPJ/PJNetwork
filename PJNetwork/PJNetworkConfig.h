@@ -17,13 +17,17 @@
 
 
 /**
+ 超时时间
+ */
+@property (nonatomic, assign) NSTimeInterval timeoutInterval;
+
+/**
  弃用蜂窝移动网络？ 默认为NO
  */
 @property (nonatomic, assign, readonly) BOOL cellularDisabled;
 
 /// 蜂窝网络是否可用
-+ (BOOL (^)())cellularDisabled;
-
++ (BOOL (^)(void))cellularDisabled;
 /// 设置蜂窝网络是否可用
 + (void (^)(BOOL beDisabled))cellularShouldBeDisabled;
 

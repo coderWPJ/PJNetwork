@@ -56,11 +56,6 @@ typedef NS_ENUM(NSInteger, PJResponseSerializerType) {
 @property (nonatomic, assign) NSURLSessionTaskState state;
 
 /**
- timeout
- */
-@property (nonatomic, assign) NSTimeInterval timeout;
-
-/**
  requestTask
  */
 @property (nonatomic, strong, readonly) NSURLSessionTask *requestTask;

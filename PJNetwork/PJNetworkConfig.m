@@ -16,7 +16,7 @@
 
 @implementation PJNetworkConfig
 
-+ (BOOL (^)())cellularDisabled
++ (BOOL (^)(void))cellularDisabled
 {
     return ^(){
         PJNetworkConfig *networkConfig = [PJNetworkConfig shareConfig];
@@ -49,6 +49,7 @@
     dispatch_once(&onceToken, ^{
         shareConfig = [[PJNetworkConfig alloc] init];
         shareConfig.cellularDisabled = NO;
+        shareConfig.timeoutInterval = 45.0f;
     });
     return shareConfig;
 }

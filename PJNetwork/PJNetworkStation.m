@@ -10,6 +10,7 @@
 #import "PJNetworkConfig.h"
 #import <pthread/pthread.h>
 #import "PJNetworkSessionManager.h"
+#import "Reachability.h"
 
 #if __has_include(<AFNetworking/AFNetworking.h>)
     #import <AFNetworking/AFNetworking.h>
@@ -99,6 +100,14 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 /// 开始请求
 - (void)startRequest:(PJRequest *)request result:(RequestCompleteBlock)result
 {
+    /// 当蜂窝网络不可用时
+    if (PJNetworkConfig.cellularDisabled()){
+        Reachability *reachability   = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+        if ([reachability currentReachabilityStatus] == ReachableViaWWAN){
+            result(NO, @"已禁用蜂窝移动网络");
+            return;
+        }
+    }
     NSParameterAssert(request != nil);
     request.requestResultBlock = result;
     
@@ -147,6 +156,8 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     if (!request.disabledBaseUrl && PJNetworkConfig.baseUrlValid()) {
         requestUrlStr = [[PJNetworkConfig shareConfig].baseUrl stringByAppendingPathComponent:requestUrlStr];
     }
+    requestUrlStr = [requestUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
     if (request.header && [request.header isKindOfClass:[NSDictionary class]]) {
         __weak typeof(self) weakSelf = self;
         [request.header enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {

@@ -46,10 +46,8 @@
         requestSerializer = [AFHTTPRequestSerializer serializer];
     }
     
-    requestSerializer.timeoutInterval = self.timeout;
+    requestSerializer.timeoutInterval = [PJNetworkConfig shareConfig].timeoutInterval;
     requestSerializer.allowsCellularAccess = PJNetworkConfig.cellularDisabled();
-    
-    
     
     return requestSerializer;
 }
@@ -77,7 +75,6 @@
             self.header = header;
         }
         self.disabledBaseUrl = disabled;
-        self.timeout = 30.0f;
         
         // 设置数据类型
         self.requestSerializerType = PJRequestSerializerTypeJSON;

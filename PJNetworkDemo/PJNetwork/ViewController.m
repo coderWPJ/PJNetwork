@@ -20,7 +20,7 @@
     [super viewDidLoad];
     
     [PJNetworkStation GET:@"http://lf.snssdk.com/api/2/article/v35/stream/" params:nil header:nil result:^(BOOL success, id info) {
-        
+        NSLog(@"%@", info);
     }];
     
 }

@@ -20,14 +20,10 @@ PODS:
     - PJNetwork/Reachability (= 1.0.7)
   - PJNetwork/Reachability (1.0.7):
     - AFNetworking (~> 3.1)
-  - SDWebImage (4.4.2):
-    - SDWebImage/Core (= 4.4.2)
-  - SDWebImage/Core (4.4.2)
 
 DEPENDENCIES:
   - MJExtension
   - PJNetwork (from `../`)
-  - SDWebImage
 
 EXTERNAL SOURCES:
   PJNetwork:
@@ -37,8 +33,7 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   PJNetwork: ff863ff8eab375d72f038fb7fad02f313a62d80e
-  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
 
-PODFILE CHECKSUM: 307ac7ab427683a1e9b557eb6f44187e52f52782
+PODFILE CHECKSUM: 5f748e4158c6e54ed023f6774e7eddc1e649d189
 
 COCOAPODS: 1.3.1

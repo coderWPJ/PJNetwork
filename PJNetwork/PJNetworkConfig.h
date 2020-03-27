@@ -21,6 +21,11 @@
  */
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
 
+// 客户端是否信任非法证书
+@property (nonatomic, assign) BOOL allowInvalidCertificates;
+// 是否在证书域字段中验证域名
+@property (nonatomic, assign) BOOL validatesDomainName;
+
 /**
  弃用蜂窝移动网络？ 默认为NO
  */

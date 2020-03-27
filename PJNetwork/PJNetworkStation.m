@@ -47,6 +47,11 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     self = [super init];
     if (self) {
         self.sessionManager = [PJNetworkSessionManager manager];
+        AFSecurityPolicy *securityPolicy =  [AFSecurityPolicy defaultPolicy];
+        securityPolicy.allowInvalidCertificates = [PJNetworkConfig shareConfig].allowInvalidCertificates;
+        securityPolicy.validatesDomainName = [PJNetworkConfig shareConfig].validatesDomainName;
+        self.sessionManager.securityPolicy = securityPolicy;
+        
         _allRequestList = @{}.mutableCopy;
         _recordVCRequestList = @{}.mutableCopy;
         _config = [PJNetworkConfig shareConfig];
@@ -219,9 +224,6 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     }
     if (!request || !responseObject || error) {
         if (error) {
-            if (error.code == NSURLErrorCancelled) {
-                return;
-            }
             resultBlock(NO, @{@"code":@(error.code), @"des":error.localizedDescription});
         }else{
             NSInteger codeValue = -1000;

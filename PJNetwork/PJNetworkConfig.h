@@ -15,6 +15,10 @@
  */
 @property (nonatomic, copy) NSString *baseUrl;
 
+/**
+ 通用请求头
+*/
+@property (nonatomic, strong) NSDictionary *commonHeader;
 
 /**
  超时时间

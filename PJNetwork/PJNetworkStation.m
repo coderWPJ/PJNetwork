@@ -163,13 +163,21 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     }
     requestUrlStr = [requestUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
+    // 设置header
+    NSMutableDictionary *headerInfo = @{}.mutableCopy;
     if (request.header && [request.header isKindOfClass:[NSDictionary class]]) {
-        __weak typeof(self) weakSelf = self;
-        [request.header enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf.sessionManager.requestSerializer setValue:obj forHTTPHeaderField:key];
-        }];
+        [headerInfo addEntriesFromDictionary:request.header];
     }
+    NSDictionary *commonHeader = [PJNetworkConfig shareConfig].commonHeader;
+    if (commonHeader && [commonHeader isKindOfClass:[NSDictionary class]]) {
+        [headerInfo addEntriesFromDictionary:commonHeader];
+    }
+    __weak typeof(self) weakSelf = self;
+    [headerInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.sessionManager.requestSerializer setValue:obj forHTTPHeaderField:key];
+    }];
+    
     _sessionManager.responseSerializer = request.responseSerializer;
     _sessionManager.responseSerializer.acceptableContentTypes = [request acceptableContentTypes];
     NSString *methodString = httpMethodStringsArray[request.httpMethod];
@@ -276,6 +284,10 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     [PJNetworkStation requst:PJHttpMethodPOST url:url params:params header:header disabledBaseUrl:NO result:result];
 }
 
++ (void)POST:(NSString *)url params:(id)params result:(PJRequestCompleteBlock)result{
+    [PJNetworkStation POST:url params:params header:nil result:result];
+}
+
 + (void)POST:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
 {
     [PJNetworkStation requst:PJHttpMethodPOST url:url params:params header:header disabledBaseUrl:disabled result:result];
@@ -284,6 +296,10 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 + (void)GET:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
 {
     [PJNetworkStation requst:PJHttpMethodGET url:url params:params header:header disabledBaseUrl:disabled result:result];
+}
+
++ (void)GET:(NSString *)url params:(id)params result:(PJRequestCompleteBlock)result{
+    [PJNetworkStation GET:url params:params header:nil result:result];
 }
 
 + (void)GET:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result

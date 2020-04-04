@@ -75,6 +75,7 @@ FOUNDATION_EXPORT NSString *const PJNetwork_VCDealloc_Notitication;
  @param result result
  */
 + (void)POST:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result;
++ (void)POST:(NSString *)url params:(id)params result:(PJRequestCompleteBlock)result;
 + (void)POST:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
 
 /**
@@ -86,6 +87,7 @@ FOUNDATION_EXPORT NSString *const PJNetwork_VCDealloc_Notitication;
  @param result result
  */
 + (void)GET:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result;
++ (void)GET:(NSString *)url params:(id)params result:(PJRequestCompleteBlock)result;
 + (void)GET:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
 
 @end

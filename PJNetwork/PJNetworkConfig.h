@@ -16,9 +16,19 @@
 @property (nonatomic, copy) NSString *baseUrl;
 
 /**
- 通用请求头
+ 通用请求头（若存在key与请求model的header中内容重复，则优先级低于请求model）
 */
 @property (nonatomic, strong) NSDictionary *commonHeader;
+
+/**
+ 通用请求参数（若存在key与请求model的params中内容重复，则优先级低于请求model）
+*/
+@property (nonatomic, strong) NSDictionary *commonParams;
+
+/**
+ 网络回调监控，所有网络回调都会执行（不会影响原有的回调）
+*/
+@property (nonatomic, strong) void (^ networkCallbackMonitorBlock)(NSString *url, BOOL success, id info);
 
 /**
  超时时间

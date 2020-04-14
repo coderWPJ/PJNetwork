@@ -183,13 +183,19 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     NSString *methodString = httpMethodStringsArray[request.httpMethod];
     NSError *serializationError = nil;
     
+    
     id paramsObj = @{};
 #if TARGET_OS_IOS || TARGET_OS_TV
     paramsObj = [PJNetworkDataShell holyParams:request.params];
 #else
     paramsObj = request.params;
 #endif
-    
+    NSDictionary *commonParams = [PJNetworkConfig shareConfig].commonParams;
+    if (commonParams && [commonParams isKindOfClass:[NSDictionary class]]) {
+        NSMutableDictionary *finalParams = commonParams.mutableCopy;
+        [finalParams addEntriesFromDictionary:((NSDictionary *)paramsObj)];
+        paramsObj = finalParams;
+    }
     NSMutableURLRequest *temUrlRequest = [_sessionManager.requestSerializer requestWithMethod:methodString URLString:[[NSURL URLWithString:requestUrlStr] absoluteString] parameters:paramsObj error:&serializationError];
     if (serializationError) {
         return nil;
@@ -261,6 +267,9 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     dispatch_async(dispatch_get_main_queue(), ^{
         resultBlock(succeed, resultInfo);
         request.requestResultBlock = nil;
+        if ([PJNetworkConfig shareConfig].networkCallbackMonitorBlock && request.urlString && (request.urlString.length > 0)) {
+            [PJNetworkConfig shareConfig].networkCallbackMonitorBlock(request.urlString, succeed, resultInfo);
+        }
     });
 }
 

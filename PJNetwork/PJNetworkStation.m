@@ -265,11 +265,12 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        resultBlock(succeed, resultInfo);
-        request.requestResultBlock = nil;
-        if ([PJNetworkConfig shareConfig].networkCallbackMonitorBlock && request.urlString && (request.urlString.length > 0)) {
-            [PJNetworkConfig shareConfig].networkCallbackMonitorBlock(request.urlString, succeed, resultInfo);
+        if ([PJNetworkConfig shareConfig].requestInterceptor) {
+            [PJNetworkConfig shareConfig].requestInterceptor(resultBlock, succeed, resultInfo);
+        } else {
+            resultBlock(succeed, resultInfo);
         }
+        request.requestResultBlock = nil;
     });
 }
 

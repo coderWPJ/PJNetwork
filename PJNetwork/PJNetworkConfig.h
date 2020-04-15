@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^ PJNetworkConfigMonitorBlock) (BOOL success, id info);
+
 @interface PJNetworkConfig : NSObject
 
 /**
@@ -26,10 +28,9 @@
 @property (nonatomic, strong) NSDictionary *commonParams;
 
 /**
- 网络回调监控，所有网络回调都会执行（不会影响原有的回调）
+ 请求拦截器，方便业务方统一处理回调
 */
-@property (nonatomic, strong) void (^ networkCallbackMonitorBlock)(NSString *url, BOOL success, id info);
-
+@property (nonatomic, copy) void (^ requestInterceptor)(PJNetworkConfigMonitorBlock resultBlock, BOOL success, id info);
 /**
  超时时间
  */

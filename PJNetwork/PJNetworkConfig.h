@@ -28,9 +28,10 @@ typedef void (^ PJNetworkConfigMonitorBlock) (BOOL success, id info);
 @property (nonatomic, strong) NSDictionary *commonParams;
 
 /**
- 请求拦截器，方便业务方统一处理回调
+ 回调拦截器
 */
-@property (nonatomic, copy) void (^ requestInterceptor)(PJNetworkConfigMonitorBlock resultBlock, BOOL success, id info);
+@property (nonatomic, copy) void (^ responseProcurator)(PJNetworkConfigMonitorBlock resultBlock, BOOL success, id info);
+
 /**
  超时时间
  */

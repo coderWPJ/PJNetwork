@@ -265,8 +265,8 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([PJNetworkConfig shareConfig].requestInterceptor) {
-            [PJNetworkConfig shareConfig].requestInterceptor(resultBlock, succeed, resultInfo);
+        if ([PJNetworkConfig shareConfig].responseProcurator) {
+            [PJNetworkConfig shareConfig].responseProcurator(resultBlock, succeed, resultInfo);
         } else {
             resultBlock(succeed, resultInfo);
         }

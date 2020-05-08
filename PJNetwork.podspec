@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "8.0"
   s.framework = "CFNetwork"
-  s.dependency "AFNetworking", "~> 3.1"
+  s.dependency "AFNetworking"
 
 end

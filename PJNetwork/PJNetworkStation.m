@@ -105,13 +105,19 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 /// 开始请求
 - (void)startRequest:(PJRequest *)request result:(PJRequestCompleteBlock)result
 {
+    PJ_Reachability *reachability   = [PJ_Reachability reachabilityWithHostName:@"www.apple.com"];
     /// 当蜂窝网络不可用时
-    if (PJNetworkConfig.cellularDisabled()){
-        PJ_Reachability *reachability   = [PJ_Reachability reachabilityWithHostName:@"www.baidu.com"];
-        if ([reachability currentReachabilityStatus] == ReachableViaWWAN){
-            result(NO, @"已禁用蜂窝移动网络");
-            return;
+    if (([reachability currentReachabilityStatus] == ReachableViaWWAN) && PJNetworkConfig.cellularDisabled()) {
+        if (result) {
+            result(NO, @{@"code":@(-9103), @"des":@"Cellular is disabled!"});
         }
+        return;
+    }
+    if ([reachability currentReachabilityStatus] == NotReachable) {
+        if (result) {
+            result(NO, @{@"code":@(-9102), @"des":@"Network is unreachable!"});
+        }
+        return;
     }
     NSParameterAssert(request != nil);
     request.requestResultBlock = result;
@@ -250,7 +256,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     request.taskResponse = task.response;
     NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
     if (((statusCode < 200) || (statusCode >= 300))) {
-        resultBlock(NO, @{@"code":@(-1), @"des":@"状态码异常"});
+        resultBlock(NO, @{@"code":@(-9101), @"des":@"Http code invalid !"});
         return;
     }
     

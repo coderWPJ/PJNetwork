@@ -178,6 +178,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     if (commonHeader && [commonHeader isKindOfClass:[NSDictionary class]]) {
         [headerInfo addEntriesFromDictionary:commonHeader];
     }
+    self.sessionManager.requestSerializer = request.requestSerializer;
     __weak typeof(self) weakSelf = self;
     [headerInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         __strong typeof(weakSelf) strongSelf = weakSelf;

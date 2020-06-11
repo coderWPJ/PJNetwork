@@ -39,15 +39,12 @@
 /// 当前 request 对应的 requestSerializer
 - (id)requestSerializer
 {
-    AFHTTPRequestSerializer *requestSerializer = nil;
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     if (self.requestSerializerType == PJRequestSerializerTypeJSON) {
         requestSerializer = [AFJSONRequestSerializer serializer];
-    } else {
-        requestSerializer = [AFHTTPRequestSerializer serializer];
     }
-    
     requestSerializer.timeoutInterval = [PJNetworkConfig shareConfig].timeoutInterval;
-    requestSerializer.allowsCellularAccess = PJNetworkConfig.cellularDisabled();
+    requestSerializer.allowsCellularAccess = !PJNetworkConfig.cellularDisabled();
     
     return requestSerializer;
 }
@@ -77,7 +74,7 @@
         self.disabledBaseUrl = disabled;
         
         // 设置数据类型
-        self.requestSerializerType = PJRequestSerializerTypeJSON;
+        self.requestSerializerType = PJRequestSerializerTypeHTTP;
         self.responseSerializerType = PJResponseSerializerTypeJSON;
     }
     return self;

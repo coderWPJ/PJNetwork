@@ -105,6 +105,12 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 /// 开始请求
 - (void)startRequest:(PJRequest *)request result:(PJRequestCompleteBlock)result
 {
+    if (!request.urlString || (request.urlString.length == 0)) {
+        if (result) {
+            result(NO, @{@"code":@(-9104), @"des":@"url is unreachable!"});
+        }
+        return;
+    }
     PJ_Reachability *reachability   = [PJ_Reachability reachabilityWithHostName:@"www.apple.com"];
     /// 当蜂窝网络不可用时
     if (([reachability currentReachabilityStatus] == ReachableViaWWAN) && PJNetworkConfig.cellularDisabled()) {
@@ -285,10 +291,17 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 
 @implementation PJNetworkStation (PJNetworkStation_Shortcut)
 
-- (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
+- (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest responseSerializer:(BOOL)isJsonResponse disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
 {
     PJRequest *request = [PJRequest request:method urlString:url params:params header:header disabledBaseUrl:disabled];
+    request.requestSerializerType = isJsonRequest?PJRequestSerializerTypeJSON:PJRequestSerializerTypeHTTP;
+    request.responseSerializerType = isJsonResponse?PJResponseSerializerTypeJSON:PJResponseSerializerTypeHTTP;
     [self startRequest:request result:result];
+}
+
+- (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
+{
+    [self requst:method url:url params:params header:header requestSerializer:NO responseSerializer:YES disabledBaseUrl:disabled result:result];
 }
 
 + (void)requst:(PJHttpMethod)method url:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
@@ -310,6 +323,14 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     [PJNetworkStation requst:PJHttpMethodPOST url:url params:params header:header disabledBaseUrl:disabled result:result];
 }
 
++ (void)POST:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest responseSerializer:(BOOL)isJsonResponse disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result{
+    [[PJNetworkStation shareStation] requst:PJHttpMethodPOST url:url params:params header:header requestSerializer:isJsonRequest responseSerializer:isJsonResponse disabledBaseUrl:disabled  result:result];
+}
+
++ (void)POST:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest result:(PJRequestCompleteBlock)result{
+    [PJNetworkStation POST:url params:params header:header requestSerializer:isJsonRequest responseSerializer:YES disabledBaseUrl:NO result:result];
+}
+
 + (void)GET:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result
 {
     [PJNetworkStation requst:PJHttpMethodGET url:url params:params header:header disabledBaseUrl:disabled result:result];
@@ -322,6 +343,14 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 + (void)GET:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result
 {
     [PJNetworkStation requst:PJHttpMethodGET url:url params:params header:header disabledBaseUrl:NO result:result];
+}
+
++ (void)GET:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest responseSerializer:(BOOL)isJsonResponse disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result{
+    [[PJNetworkStation shareStation] requst:PJHttpMethodGET url:url params:params header:header requestSerializer:isJsonRequest responseSerializer:isJsonResponse disabledBaseUrl:disabled result:result];
+}
+
++ (void)GET:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest result:(PJRequestCompleteBlock)result{
+    [PJNetworkStation GET:url params:params header:header requestSerializer:NO responseSerializer:isJsonRequest disabledBaseUrl:NO result:result];
 }
 
 @end

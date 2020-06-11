@@ -67,13 +67,18 @@ FOUNDATION_EXPORT NSString *const PJNetwork_VCDealloc_Notitication;
 
 
 /**
- POST 请求  （disabledBaseUrl默认为NO）
- 
- @param url url
- @param params params
- @param header header
- @param result result
- */
+POST 请求  （disabledBaseUrl默认为NO）
+
+@param url url
+@param params params
+@param header header
+@param isJsonRequest 是否使用AFJSONRequestSerializer，不使用此方法默认是NO
+@param isJsonResponse 是否使用AFJSONResponseSerializer，不使用此方法默认是YES
+@param result result
+*/
++ (void)POST:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest responseSerializer:(BOOL)isJsonResponse disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
+
++ (void)POST:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest result:(PJRequestCompleteBlock)result;
 + (void)POST:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result;
 + (void)POST:(NSString *)url params:(id)params result:(PJRequestCompleteBlock)result;
 + (void)POST:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
@@ -84,8 +89,13 @@ FOUNDATION_EXPORT NSString *const PJNetwork_VCDealloc_Notitication;
  @param url url
  @param params params
  @param header header
+ @param isJsonRequest 是否使用AFJSONRequestSerializer，不使用此方法默认是NO
+ @param isJsonResponse 是否使用AFJSONResponseSerializer，不使用此方法默认是YES
  @param result result
  */
++ (void)GET:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest responseSerializer:(BOOL)isJsonResponse disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;
+
++ (void)GET:(NSString *)url params:(id)params header:(id)header requestSerializer:(BOOL)isJsonRequest result:(PJRequestCompleteBlock)result;
 + (void)GET:(NSString *)url params:(id)params header:(id)header result:(PJRequestCompleteBlock)result;
 + (void)GET:(NSString *)url params:(id)params result:(PJRequestCompleteBlock)result;
 + (void)GET:(NSString *)url params:(id)params header:(id)header disabledBaseUrl:(BOOL)disabled result:(PJRequestCompleteBlock)result;

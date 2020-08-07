@@ -107,7 +107,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
 {
     if (!request.urlString || (request.urlString.length == 0)) {
         if (result) {
-            result(NO, @{@"code":@(-9104), @"des":@"url is unreachable!"});
+            [self responseResult:result success:NO resultInfo:@{@"code":@(-9104), @"des":@"url is unreachable!"}];
         }
         return;
     }
@@ -115,13 +115,13 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     /// 当蜂窝网络不可用时
     if (([reachability currentReachabilityStatus] == ReachableViaWWAN) && PJNetworkConfig.cellularDisabled()) {
         if (result) {
-            result(NO, @{@"code":@(-9103), @"des":@"Cellular is disabled!"});
+            [self responseResult:result success:NO resultInfo:@{@"code":@(-9103), @"des":@"Cellular is disabled!"}];
         }
         return;
     }
     if ([reachability currentReachabilityStatus] == NotReachable) {
         if (result) {
-            result(NO, @{@"code":@(-9102), @"des":@"Network is unreachable!"});
+            [self responseResult:result success:NO resultInfo:@{@"code":@(-9102), @"des":@"Network is unreachable!"}];
         }
         return;
     }
@@ -251,11 +251,11 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     }
     if (!request || !responseObject || error) {
         if (error) {
-            resultBlock(NO, @{@"code":@(error.code), @"des":error.localizedDescription});
+            [self responseResult:resultBlock success:NO resultInfo:@{@"code":@(error.code), @"des":error.localizedDescription}];
         }else{
             NSInteger codeValue = -1000;
             NSString *errDes = !responseObject?@"response NULL!":@"Request invalid!";
-            resultBlock(NO, @{@"code":@(codeValue), @"des":errDes});
+            [self responseResult:resultBlock success:NO resultInfo:@{@"code":@(codeValue), @"des":errDes}];
         }
         return;
     }
@@ -263,7 +263,7 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     request.taskResponse = task.response;
     NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
     if (((statusCode < 200) || (statusCode >= 300))) {
-        resultBlock(NO, @{@"code":@(-9101), @"des":@"Http code invalid !"});
+        [self responseResult:resultBlock success:NO resultInfo:@{@"code":@(-9101), @"des":@"Http code invalid !"}];
         return;
     }
     
@@ -278,13 +278,17 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([PJNetworkConfig shareConfig].responseProcurator) {
-            [PJNetworkConfig shareConfig].responseProcurator(resultBlock, succeed, resultInfo);
-        } else {
-            resultBlock(succeed, resultInfo);
-        }
+        [self responseResult:resultBlock success:success resultInfo:resultInfo];
         request.requestResultBlock = nil;
     });
+}
+
+- (void)responseResult:(PJRequestCompleteBlock)resultBlock success:(BOOL)success resultInfo:(id)resultInfo{
+    if ([PJNetworkConfig shareConfig].responseProcurator) {
+        [PJNetworkConfig shareConfig].responseProcurator(resultBlock, succeed, resultInfo);
+    } else {
+        resultBlock(succeed, resultInfo);
+    }
 }
 
 @end

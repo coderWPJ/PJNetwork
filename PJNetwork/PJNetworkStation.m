@@ -278,16 +278,16 @@ NSString *const PJNetwork_VCDealloc_Notitication = @"PJNetwork_VCDealloc_Notitic
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self responseResult:resultBlock success:success resultInfo:resultInfo];
+        [self responseResult:resultBlock success:succeed resultInfo:resultInfo];
         request.requestResultBlock = nil;
     });
 }
 
 - (void)responseResult:(PJRequestCompleteBlock)resultBlock success:(BOOL)success resultInfo:(id)resultInfo{
     if ([PJNetworkConfig shareConfig].responseProcurator) {
-        [PJNetworkConfig shareConfig].responseProcurator(resultBlock, succeed, resultInfo);
+        [PJNetworkConfig shareConfig].responseProcurator(resultBlock, success, resultInfo);
     } else {
-        resultBlock(succeed, resultInfo);
+        resultBlock(success, resultInfo);
     }
 }
 

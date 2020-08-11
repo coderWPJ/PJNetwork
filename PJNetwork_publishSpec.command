@@ -55,7 +55,9 @@ git tag ${targetVersionStr}
 git push origin master --tags
 
 # 推送spec文件
+echo "开始推送spec文件 ${targetSpecFileName}"
 pod trunk push ./${targetSpecFileName} --verbose --use-libraries --allow-warnings
 
+echo "版本已更新至 ${targetVersionStr}，请在repo repo update 后操作"
 
 exit 0

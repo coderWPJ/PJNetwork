@@ -50,8 +50,8 @@ echo "版本号：  ${versionStr} >>>>>> 更新到 >>>>>> ${targetVersionStr}"
 
 # git 操作
 git add --all
-git commit -am "Commit ${version}"
-git tag ${version}
+git commit -am "Commit ${targetVersionStr}"
+git tag ${targetVersionStr}
 git push origin master --tags
 
 # 推送spec文件

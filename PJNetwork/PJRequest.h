@@ -52,6 +52,10 @@ typedef NS_ENUM(NSInteger, PJResponseSerializerType) {
  */
 @property (nonatomic, copy) NSDictionary *header;
 
+/**
+ 超时时间
+ */
+@property (nonatomic, assign) NSTimeInterval timeoutInterval;
 
 @property (nonatomic, assign) NSURLSessionTaskState state;
 

@@ -43,7 +43,11 @@
     if (self.requestSerializerType == PJRequestSerializerTypeJSON) {
         requestSerializer = [AFJSONRequestSerializer serializer];
     }
-    requestSerializer.timeoutInterval = [PJNetworkConfig shareConfig].timeoutInterval;
+    if (self.timeoutInterval > 0) {
+        requestSerializer.timeoutInterval = self.timeoutInterval;
+    } else {
+        requestSerializer.timeoutInterval = [PJNetworkConfig shareConfig].timeoutInterval;
+    }
     requestSerializer.allowsCellularAccess = !PJNetworkConfig.cellularDisabled();
     
     return requestSerializer;
@@ -76,6 +80,8 @@
         // 设置数据类型
         self.requestSerializerType = PJRequestSerializerTypeHTTP;
         self.responseSerializerType = PJResponseSerializerTypeJSON;
+        
+        self.timeoutInterval = -1;
     }
     return self;
 }
